@@ -1,0 +1,15 @@
+diff --git a/node_modules/electron-devtools-installer/dist/index.js b/node_modules/electron-devtools-installer/dist/index.js
+index 2744fd6..d706062 100644
+--- a/node_modules/electron-devtools-installer/dist/index.js
++++ b/node_modules/electron-devtools-installer/dist/index.js
+@@ -100,7 +100,9 @@ var install = function install(extensionReference) {
+ 
+ 
+     if (_electron.session.defaultSession.loadExtension) {
+-      return _electron.session.defaultSession.loadExtension(extensionFolder).then(function (ext) {
++      return _electron.session.defaultSession.loadExtension(extensionFolder,{
++        allowFileAccess: true
++      }).then(function (ext) {
+         return Promise.resolve(ext.name);
+       });
+     }
