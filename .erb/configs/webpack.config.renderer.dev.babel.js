@@ -69,6 +69,28 @@ export default merge(baseConfig, {
         ],
       },
       {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
+          },
+        ],
+      },
+      {
         test: /\.global\.css$/,
         use: [
           {
