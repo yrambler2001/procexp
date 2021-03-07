@@ -1,6 +1,14 @@
-<img src=".erb/img/erb-banner.png" width="100%" />
+[Process Explorer](https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer) clone written in Electron & React
+<img src="./readme/img.png" width="100%" />
 
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<img src=".erb/img/erb-banner.png" width="100%" />
 
 <p>
   Electron React Boilerplate uses <a href="https://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="https://webpack.github.io/docs/">Webpack</a> and <a href="https://www.npmjs.com/package/react-refresh">React Fast Refresh</a>.

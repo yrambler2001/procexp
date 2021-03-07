@@ -1,0 +1,42 @@
+diff --git a/node_modules/ps-list/index.js b/node_modules/ps-list/index.js
+index 75d4da7..b234273 100644
+--- a/node_modules/ps-list/index.js
++++ b/node_modules/ps-list/index.js
+@@ -41,7 +41,7 @@ const nonWindowsMultipleCalls = async (options = {}) => {
+ 	const flags = (options.all === false ? '' : 'a') + 'wwxo';
+ 	const ret = {};
+ 
+-	await Promise.all(['comm', 'args', 'ppid', 'uid', '%cpu', '%mem'].map(async cmd => {
++	await Promise.all(['comm', 'args', 'ppid', 'uid', '%cpu', '%mem', 'user','vsz','rss'].map(async cmd => {
+ 		const {stdout} = await execFile('ps', [flags, `pid,${cmd}`], {maxBuffer: TEN_MEGABYTES});
+ 
+ 		for (let line of stdout.trim().split('\n').slice(1)) {
+@@ -67,8 +67,11 @@ const nonWindowsMultipleCalls = async (options = {}) => {
+ 			cmd: value.args,
+ 			ppid: Number.parseInt(value.ppid, 10),
+ 			uid: Number.parseInt(value.uid, 10),
++			vsz: Number.parseInt(value.vsz, 10),
++			rss: Number.parseInt(value.rss, 10),
+ 			cpu: Number.parseFloat(value['%cpu']),
+-			memory: Number.parseFloat(value['%mem'])
++			memory: Number.parseFloat(value['%mem']),
++			user: value.user
+ 		}));
+ };
+ 
+@@ -142,11 +145,11 @@ const nonWindowsSingleCall = async (options = {}) => {
+ };
+ 
+ const nonWindows = async (options = {}) => {
+-	try {
+-		return await nonWindowsSingleCall(options);
+-	} catch (_) { // If the error is not a parsing error, it should manifest itself in multicall version too.
++	// try {
++	// 	return await nonWindowsSingleCall(options);
++	// } catch (_) { // If the error is not a parsing error, it should manifest itself in multicall version too.
+ 		return nonWindowsMultipleCalls(options);
+-	}
++	// }
+ };
+ 
+ module.exports = process.platform === 'win32' ? windows : nonWindows;
